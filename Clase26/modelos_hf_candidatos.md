@@ -30,7 +30,7 @@
 **Una limitación declarada:** Uso de cualquier forma que infrinja las leyes o regulaciones aplicables (incluidas las leyes de cumplimiento comercial). Uso de cualquier otra forma prohibida por la Política de uso aceptable y la Licencia de la comunidad Llama 3.2. Uso en idiomas distintos a los explícitamente mencionados como compatibles en esta tarjeta modelo.
 
 **Modelo 2**  
-**![](captures/nvidia.jpg)**
+**![captura_de_imagen](captures/nvidia.jpg)**
 
 **Nombre completo:** NVIDIA-Nemotron-3-súper-120B-A12B-NVFP4  
 **Identificador en Hugging Face:** nvidia/NVIDIA-Nemotron-3-Super-120B-A12B-NVFP4  
