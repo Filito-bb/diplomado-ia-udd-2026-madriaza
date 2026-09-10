@@ -74,11 +74,11 @@ Por un lado, **Flux.1** desvió la atención del elemento principal expresado en
 
 **Space 1: BananaMind-Arena**
 
-![][image6]  
-![][image7]  
+**![](captures/Banana1.jpeg)** 
+**![](captures/Banana2.jpeg)** 
 **Space 2: ChatGPT Prompt Generator**
 
-**![][image8]**
+**![](captures/Chatgpt_prompt.jpeg)** 
 
 Ambos Spaces fueron rápidos, aunque BananaMind Arena tardó ligeramente más en procesar la respuesta, éste ofreció respuestas informativas directas, pero con inconsistencias. En cambio, ChatGPT Prompt Generator transformó la entrada en un prompt de rol estructurado y preciso de manera inmediata. 
 
