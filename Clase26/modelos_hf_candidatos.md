@@ -40,7 +40,7 @@
 **Una limitación declarada:** Uso de memoria**:** A pesar de activar solo 12 mil millones de parámetros por token (12B activos de 120B totales), la carga total del modelo en memoria requiere hardware de clase empresarial/servidor (típicamente 80 GB+ de VRAM).
 
 **Modelo 3**  
-**![][image3]**
+**![](captures/Blooz.jpeg)**
 
 **Nombre completo:** bloomz-560m  
 **Identificador en Hugging Face:** bigscience/bloomz-560m  
