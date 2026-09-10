@@ -58,10 +58,10 @@
 **Promp:** Un celular en el centro de una mesa de comedor de madera rústica, estilo cálido y hogareño
 
 **Space 1: FLUX.1**   
-**![][image4]**
+**![](captures/Flux.jpeg)**
 
 **Space 2: Z Image Turbo**  
-**![][image5]**
+**![](captures/zturbo.jpeg)**
 
 * ✅ Comparar outputs, velocidad, calidad.
 
