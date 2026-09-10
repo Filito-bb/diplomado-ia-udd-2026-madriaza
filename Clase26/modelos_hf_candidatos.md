@@ -20,7 +20,7 @@
   * Una limitación declarada en la model card.
 
 **Modelo 1**  
-**![][image1]**
+**![][IMG_0355.jpg]**
 
 **Nombre completo:** Llama 3.2-1B-Instruct  
 **Identificador en Hugging Face:** meta-llama/Llama-3.2-1B-Instruct  
