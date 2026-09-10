@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://127.0.0.1:5500/#inicio -->
+<html lang="es" data-theme="light"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobremesa · Hallazgos Principales del Proyecto de Diseño</title>
+  <meta name="description" content="Reporte interactivo y minimalista de los hallazgos de diseño, UX/UI, datos, infografías y arquitectura del proyecto Sobremesa (UDD 2026).">
+  
+  <!-- Tipografía Sans-Serif Moderna de Gran Escala: Plus Jakarta Sans & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./Sobremesa · Hallazgos Principales del Proyecto de Diseño_files/css2" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       VARIABLES Y SISTEMA DE DISEÑO: DARK MINIMAL CON ACENTO ESMERALDA
+       ========================================================================== */
+    :root {
+      --bg-primary: #0A0C10;
+      --bg-surface: #12151C;
+      --bg-subtle: #181C26;
+      --bg-elevated: #202634;
+      --border-color: #242B38;
+      --border-light: rgba(255, 255, 255, 0.08);
+
+      --text-main: #F8FAFC;
+      --text-secondary: #94A3B8;
+      --text-muted: #64748B;
+      
+      /* Acentos en Verde */
+      --accent-green: #10B981;
+      --accent-green-bright: #34D399;
+      --accent-green-glow: rgba(16, 185, 129, 0.22);
+      --accent-green-soft: rgba(16, 185, 129, 0.10);
+      --accent-green-border: rgba(16, 185, 129, 0.35);
+
+      /* Alertas y secundarios */
+      --accent-coral: #F87171;
+      --accent-coral-soft: rgba(248, 113, 113, 0.12);
+      --accent-navy: #38BDF8;
+      --accent-navy-soft: rgba(56, 189, 248, 0.12);
+      
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.65);
+
+      --radius-sm: 6px;
+      --radius-md: 14px;
+      --radius-lg: 22px;
+      --radius-full: 9999px;
+
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-display: 'Space Grotesk', var(--font-sans);
+      --font-mono: 'JetBrains Mono', monospace;
+
+      --max-width: 1200px;
+      --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #F8FAFC;
+      --bg-surface: #FFFFFF;
+      --bg-subtle: #F1F5F9;
+      --bg-elevated: #E2E8F0;
+      --border-color: #E2E8F0;
+      --border-light: rgba(0, 0, 0, 0.06);
+
+      --text-main: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #64748B;
+
+      --accent-green: #059669;
+      --accent-green-bright: #10B981;
+      --accent-green-glow: rgba(5, 150, 105, 0.18);
+      --accent-green-soft: rgba(5, 150, 105, 0.10);
+      --accent-green-border: rgba(5, 150, 105, 0.30);
+
+      --accent-coral: #DC2626;
+      --accent-coral-soft: rgba(220, 38, 38, 0.10);
+      --accent-navy: #0284C7;
+      --accent-navy-soft: rgba(2, 132, 199, 0.10);
+
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.10);
+    }
+
+    /* Reset y base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.75rem;
+    }
+
+    /* Top Navigation */
+    .top-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      background-color: rgba(10, 12, 16, 0.88);
+      border-bottom: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+    [data-theme="light"] .top-nav {
+      background-color: rgba(248, 250, 252, 0.90);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 4.5rem;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: var(--radius-full);
+      background-color: var(--accent-green);
+      box-shadow: 0 0 12px var(--accent-green);
+    }
+
+    .brand-title {
+      font-family: var(--font-sans);
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent-green-bright);
+      background: var(--accent-green-soft);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--accent-green-border);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-links {
+      display: none;
+      gap: 1.75rem;
+      list-style: none;
+    }
+
+    @media (min-width: 960px) {
+      .nav-links {
+        display: flex;
+      }
+    }
+
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-green-bright);
+    }
+
+    .theme-toggle-btn {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: var(--transition);
+    }
+
+    .theme-toggle-btn:hover {
+      border-color: var(--accent-green);
+      color: var(--accent-green-bright);
+      box-shadow: 0 0 10px var(--accent-green-glow);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 4.5rem 0 3.5rem;
+      border-bottom: 1px solid var(--border-color);
+      position: relative;
+    }
+
+    .hero-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      background-color: var(--accent-green-soft);
+      color: var(--accent-green-bright);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.4rem 1.1rem;
+      border-radius: var(--radius-full);
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--accent-green-border);
+      box-shadow: 0 0 20px var(--accent-green-soft);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: center;
+    }
+
+    @media (min-width: 980px) {
+      .hero-grid {
+        grid-template-columns: 1.15fr 0.85fr;
+      }
+    }
+
+    .hero-title {
+      font-family: var(--font-sans);
+      font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, #10B981 0%, #34D399 50%, #6EE7B7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* Imagen Destacada del Hero (Clase 27 - Foto 1) */
+    .hero-visual-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--accent-green-border);
+      border-radius: var(--radius-lg);
+      padding: 0.85rem;
+      box-shadow: var(--shadow-lg), 0 0 30px var(--accent-green-glow);
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .hero-visual-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-green-bright);
+    }
+
+    .hero-visual-img {
+      width: 100%;
+      height: 320px;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+      display: block;
+    }
+
+    .hero-visual-caption {
+      padding: 0.9rem 0.5rem 0.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+    }
+
+    .hero-visual-caption strong {
+      color: var(--text-main);
+    }
+
+    .zoom-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-green-bright);
+    }
+
+    .hero-authors {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-top: 1.5rem;
+    }
+
+    .author-names {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* Barra de Métricas Clave */
+    .stats-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin: 3.5rem 0;
+    }
+
+    .stat-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.65rem;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-green);
+    }
+
+    .stat-number {
+      font-family: var(--font-mono);
+      font-size: 2.3rem;
+      font-weight: 700;
+      line-height: 1.1;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-number.green {
+      color: var(--accent-green-bright);
+      text-shadow: 0 0 20px var(--accent-green-glow);
+    }
+
+    .stat-number.coral {
+      color: var(--accent-coral);
+    }
+
+    .stat-label {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+    }
+
+    /* Filtros Interactivos */
+    .filter-section {
+      margin: 2.5rem 0 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.25rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .filter-btn {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: var(--font-sans);
+      padding: 0.45rem 1.1rem;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent-green);
+      color: var(--text-main);
+    }
+
+    .filter-btn.active {
+      background-color: var(--accent-green);
+      color: #0A0C10;
+      border-color: var(--accent-green);
+      font-weight: 700;
+      box-shadow: 0 0 16px var(--accent-green-glow);
+    }
+
+    .filter-count {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* Secciones Principales */
+    .section-block {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-header {
+      margin-bottom: 2.75rem;
+    }
+
+    .section-badge {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--accent-green-bright);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-sans);
+      font-size: clamp(2.2rem, 4.2vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+      color: var(--text-main);
+      margin-bottom: 0.85rem;
+    }
+
+    .section-lead {
+      font-size: 1.12rem;
+      color: var(--text-secondary);
+      max-width: 780px;
+      line-height: 1.6;
+    }
+
+    /* Showcase de Infografía & Mapa Mental */
+    .media-showcase-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      align-items: start;
+      margin: 2.5rem 0;
+    }
+
+    @media (min-width: 900px) {
+      .media-showcase-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    .media-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .media-card:hover {
+      border-color: var(--accent-green);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .media-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent-green-bright);
+      background: var(--accent-green-soft);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--accent-green-border);
+      width: fit-content;
+    }
+
+    .media-card-title {
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .media-img-wrapper {
+      position: relative;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-light);
+      cursor: pointer;
+    }
+
+    .media-img-wrapper img {
+      width: 100%;
+      height: 380px;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .media-img-wrapper:hover img {
+      transform: scale(1.02);
+    }
+
+    .media-overlay-hint {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 0.75rem 1rem;
+      background: linear-gradient(to top, rgba(10, 12, 16, 0.92), transparent);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-main);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .media-card-desc {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    .media-card-points {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .media-card-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      color: var(--text-secondary);
+    }
+
+    .media-card-points strong {
+      color: var(--text-main);
+    }
+
+    /* Grid de Tarjetas de Hallazgos */
+    .findings-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap: 2rem;
+    }
+
+    .finding-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2.25rem;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .finding-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent-green);
+    }
+
+    .finding-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.4rem;
+    }
+
+    .finding-number {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-green-bright);
+      background: var(--accent-green-soft);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--accent-green-border);
+    }
+
+    .finding-tag {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 700;
+    }
+
+    .finding-card h3 {
+      font-family: var(--font-sans);
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+      color: var(--text-main);
+    }
+
+    .finding-card p {
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .finding-quote {
+      background-color: var(--bg-subtle);
+      border-left: 3px solid var(--accent-green);
+      padding: 0.9rem 1.1rem;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      font-size: 0.92rem;
+      font-style: italic;
+      color: var(--text-main);
+      margin-bottom: 1.25rem;
+    }
+
+    .finding-footer {
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--border-light);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .finding-source {
+      font-family: var(--font-mono);
+      color: var(--accent-green-bright);
+    }
+
+    /* Gráfico SVG de Datos */
+    .data-card-wrapper {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 2.75rem;
+      margin: 2rem 0;
+      box-shadow: var(--shadow-md);
+    }
+
+    .chart-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 1.75rem;
+      gap: 1rem;
+    }
+
+    .chart-title {
+      font-family: var(--font-sans);
+      font-size: 1.65rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .chart-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
+
+    .svg-chart-container {
+      width: 100%;
+      height: 290px;
+      margin: 1.5rem 0;
+    }
+
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .legend-color {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+    }
+
+    /* Tabla de Métricas */
+    .paradigm-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 2rem 0;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      background: var(--bg-surface);
+    }
+
+    .paradigm-table th,
+    .paradigm-table td {
+      padding: 1.25rem 1.5rem;
+      text-align: left;
+      font-size: 0.98rem;
+    }
+
+    .paradigm-table th {
+      background-color: var(--bg-subtle);
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .paradigm-table tr:not(:last-child) td {
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .badge-reject {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent-coral);
+      font-weight: 700;
+    }
+
+    .badge-adopt {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--accent-green-bright);
+      font-weight: 700;
+    }
+
+    /* Matriz Ética */
+    .ethics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.75rem;
+      margin: 2rem 0;
+    }
+
+    .ethics-box {
+      border-radius: var(--radius-md);
+      padding: 2.25rem;
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+    }
+
+    .ethics-box.danger {
+      border-top: 4px solid var(--accent-coral);
+    }
+
+    .ethics-box.success {
+      border-top: 4px solid var(--accent-green);
+    }
+
+    .ethics-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-sans);
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .ethics-box.danger .ethics-header {
+      color: var(--accent-coral);
+    }
+
+    .ethics-box.success .ethics-header {
+      color: var(--accent-green-bright);
+    }
+
+    .ethics-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .ethics-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .ethics-list li strong {
+      color: var(--text-main);
+    }
+
+    /* Tarjetas de Referentes y Modelos */
+    .benchmark-grid, .ai-compare-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.75rem;
+    }
+
+    .benchmark-card, .ai-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .benchmark-card:hover, .ai-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent-green);
+    }
+
+    .benchmark-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--accent-green-bright);
+      margin-bottom: 0.6rem;
+      display: inline-block;
+    }
+
+    .benchmark-name, .ai-card-title {
+      font-family: var(--font-sans);
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    .benchmark-text {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 1rem;
+    }
+
+    .benchmark-takeaway {
+      background: var(--bg-subtle);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      font-weight: 500;
+      border-left: 3px solid var(--accent-green);
+    }
+
+    .ai-badge {
+      font-size: 0.78rem;
+      font-family: var(--font-mono);
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-sm);
+      background: var(--accent-green-soft);
+      color: var(--accent-green-bright);
+      font-weight: 600;
+      border: 1px solid var(--accent-green-border);
+    }
+
+    .ai-metrics-list {
+      margin: 1.25rem 0;
+      padding: 0;
+      list-style: none;
+      font-size: 0.92rem;
+    }
+
+    .ai-metrics-list li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed var(--border-light);
+    }
+
+    .ai-metrics-list li span:first-child {
+      color: var(--text-muted);
+    }
+
+    .ai-metrics-list li span:last-child {
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .ai-conclusion {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-top: auto;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    /* Modal / Lightbox Universal */
+    .quick-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      backdrop-filter: blur(10px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 1.5rem;
+    }
+
+    .quick-modal-overlay.active {
+      display: flex;
+    }
+
+    .quick-modal {
+      background: var(--bg-surface);
+      border: 1px solid var(--accent-green-border);
+      border-radius: var(--radius-lg);
+      max-width: 840px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 2.5rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--accent-green-glow);
+      position: relative;
+      animation: modalFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .modal-close {
+      position: sticky;
+      top: 0;
+      float: right;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      width: 38px;
+      height: 38px;
+      border-radius: var(--radius-full);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      transition: var(--transition);
+      z-index: 10;
+    }
+
+    .modal-close:hover {
+      background: var(--accent-green-soft);
+      color: var(--accent-green-bright);
+      border-color: var(--accent-green);
+    }
+
+    .modal-image-preview {
+      width: 100%;
+      max-height: 65vh;
+      object-fit: contain;
+      border-radius: var(--radius-md);
+      margin: 1.25rem 0;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border-light);
+    }
+
+    /* Footer */
+    footer {
+      padding: 4.5rem 0 3.5rem;
+      background-color: var(--bg-surface);
+      border-top: 1px solid var(--border-color);
+      margin-top: 5rem;
+    }
+
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .footer-brand h4 {
+      font-family: var(--font-sans);
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .footer-brand p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+    }
+
+    .footer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--accent-green-bright);
+      background: var(--accent-green-soft);
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-full);
+      border: 1px solid var(--accent-green-border);
+    }
+
+    @media print {
+      .top-nav, .theme-toggle-btn, .filter-section {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .finding-card, .stat-card, .ethics-box, .media-card {
+        break-inside: avoid;
+        box-shadow: none !important;
+        border: 1px solid #ccc !important;
+      }
+    }
+  </style>
+<!-- Code injected by Five-server -->
+  <script async="" data-id="five-server" data-file="/Users/margarita/Desktop/Diplomado/index.html" type="application/javascript" src="./Sobremesa · Hallazgos Principales del Proyecto de Diseño_files/fiveserver.js"></script>
+  <style>      
+      /* Injected by five-server */
+      /*[data-highlight="true"] {
+        border: 1px rgb(90,170,255) solid !important;
+        background-color: rgba(155,215,255,0.5);
+        animation: fadeOutHighlight 1s forwards 0.5s;
+      }
+      img[data-highlight="true"] {
+        filter: sepia(100%) hue-rotate(180deg) saturate(200%);
+        animation: fadeOutHighlightIMG 0.5s forwards 0.5s;
+      }*/
+      @keyframes fadeOutHighlight {
+        from {background-color: rgba(155,215,255,0.5);}
+        to {background-color: rgba(155,215,255,0);}
+      }      
+      @keyframes fadeOutHighlightIMG {
+        0% {filter: sepia(100%) hue-rotate(180deg) saturate(200%);}
+        33% {filter: sepia(66%) hue-rotate(180deg) saturate(100%);}
+        50% {filter: sepia(50%) hue-rotate(90deg) saturate(50%);}
+        66% {filter: sepia(33%) hue-rotate(0deg) saturate(100%);}
+        100% {filter: sepia(0%) hue-rotate(0deg) saturate(100%);}
+      }
+      @keyframes fiveserverInfoPopup {
+        0%   {top:-40px;}
+        15%  {top:4px;}
+        85%  {top:4px;}
+        100% {top:-40px;}
+      }
+      /*smaller*/
+      @media (max-width: 640px) {
+        #fiveserver-info-wrapper {
+          max-width: 98%;
+        }
+        #fiveserver-info {
+          border-radius: 0px;
+        }      
+      }
+
+      </style></head>
+<body>
+
+  <!-- Barra de Navegación Flotante -->
+  <header class="top-nav" id="topNav">
+    <div class="container nav-inner">
+      <a href="http://127.0.0.1:5500/#inicio" class="nav-brand" aria-label="Ir al inicio">
+        <span class="brand-dot"></span>
+        <span class="brand-title">Sobremesa</span>
+        <span class="brand-tag">UDD · IA Aplicada al Diseño 2026</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="http://127.0.0.1:5500/#hallazgos-clave">Hallazgos Clave</a></li>
+          <li><a href="http://127.0.0.1:5500/#recursos-visuales">Infografía &amp; Mapa</a></li>
+          <li><a href="http://127.0.0.1:5500/#datos">Datos &amp; Sesgos</a></li>
+          <li><a href="http://127.0.0.1:5500/#pilares">Pilares UX/UI</a></li>
+          <li><a href="http://127.0.0.1:5500/#metricas">Métricas</a></li>
+          <li><a href="http://127.0.0.1:5500/#limites">Límites Éticos</a></li>
+          <li><a href="http://127.0.0.1:5500/#benchmark">Referentes &amp; IA</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="theme-toggle-btn" id="themeToggleBtn" aria-label="Cambiar tema">
+          <span id="themeIcon">☀️</span>
+          <span id="themeText">Claro</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero / Portada del Proyecto con Foto 1 de Clase 27 -->
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-meta-pill">
+          <span>⚡</span> Síntesis de Investigación &amp; Diseño UX/UI
+        </div>
+        
+        <div class="hero-grid">
+          <div>
+            <h1 class="hero-title">
+              Redefiniendo el celular en la mesa: de agente de distracción a <em>mediador de presencia</em>.
+            </h1>
+            
+            <p class="hero-subtitle">
+              Principales hallazgos empíricos, conceptuales y visuales del proyecto <strong>Sobremesa</strong>. Un estudio sobre el impacto del tiempo en pantalla en el bienestar mental, la paradoja de la baja fricción y la arquitectura de agentes silenciosos.
+            </p>
+
+            <div class="hero-authors">
+              <div class="author-group">
+                <span>Equipo Grupo 7:</span>
+                <span class="author-names">Margarita Ferrán · Victoria Madriaza · María Ignacia Moya</span>
+              </div>
+              <div>
+                <span>Profesor:</span> <strong>Darío Osorio</strong> · Diplomado IA Aplicada al Diseño (UDD)
+              </div>
+              <div>
+                <span>Fuentes:</span> <code>Tarea_Clase29.md</code> · <code>Actividad Clase 25 - Grupo 7.pdf</code>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recurso 1 de Clase 27: Escena de Uso Editorial Realista -->
+          <div class="hero-visual-card" data-lightbox="Clase27/escena_uso_sobremesa_fotografia.png" data-caption="Escena de uso conceptual de Sobremesa (Clase 27 - Gemini 2.5 Flash Image): cuatro amigos comparten la comida en un comedor doméstico acogedor; un único smartphone descansa horizontalmente en la mesa con la pantalla hacia arriba sin acaparar miradas. La conversación presencial es la protagonista.">
+            <img class="hero-visual-img" src="./Sobremesa · Hallazgos Principales del Proyecto de Diseño_files/escena_uso_sobremesa_fotografia.png" alt="Cuatro amigos compartiendo una comida alrededor de una mesa de madera con un único smartphone en reposo horizontal como mediador sutil">
+            <div class="hero-visual-caption">
+              <span><strong>Escena de Uso Real:</strong> El celular como apoyo secundario</span>
+              <span class="zoom-hint">🔍 Clic para ampliar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra de Métricas Clave -->
+    <div class="container">
+      <div class="stats-strip">
+        <div class="stat-card">
+          <div class="stat-label">Hallazgo Central</div>
+          <div class="stat-number green">r = -0.64</div>
+          <div class="stat-desc">Fuerte correlación negativa: mayor tiempo de pantalla de ocio reduce drásticamente el bienestar mental.</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Paradoja Social</div>
+          <div class="stat-number green">20 → 22</div>
+          <div class="stat-desc">Aumentar horas sociales semanales apenas mueve el bienestar mental si persiste la distracción digital.</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Grupo Más Crítico</div>
+          <div class="stat-number coral">15.5 / 100</div>
+          <div class="stat-desc">Los estudiantes presentan el índice de bienestar más bajo de la muestra, con el mayor tiempo de pantalla.</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-label">Privacidad Radical</div>
+          <div class="stat-number green">100% Offline</div>
+          <div class="stat-desc">Funcionamiento local, sin cuentas de usuario, sin cámaras invasivas ni escucha activa de micrófonos.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN NUEVA: Infografía Oficial y Mapa Mental de NotebookLM (Clase 24) -->
+    <section class="section-block" id="recursos-visuales">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Recursos Visuales del Proyecto · Clase 24</span>
+          <h2 class="section-title">Infografía del Impacto Digital y Mapa Conceptual</h2>
+          <p class="section-lead">
+            Material analítico generado durante el proceso de investigación. Haz clic en cualquiera de las imágenes para inspeccionarlas en alta resolución.
+          </p>
+        </div>
+
+        <div class="media-showcase-grid">
+          <!-- Infografía de Sobremesa (Clase 24) -->
+          <div class="media-card">
+            <span class="media-card-badge">Clase 24 · Infografía Síntesis</span>
+            <h3 class="media-card-title">Infografía: Desconexión Digital para Vínculos Reales</h3>
+            
+            <div class="media-img-wrapper" data-lightbox="Clase24/Infografia_Sobremesa.jpeg" data-caption="Infografía Oficial del Proyecto Sobremesa (Clase 24): Análisis del impacto digital en 400 usuarios, correlación inversa r = -0.64, grupo vulnerable de estudiantes y pilares del mediador de presencia impulsado por IA generativa (Gemini Notebook).">
+              <img src="./Sobremesa · Hallazgos Principales del Proyecto de Diseño_files/Infografia_Sobremesa.jpeg" alt="Infografía del Proyecto Sobremesa: Desconexión digital para vínculos reales, datos de 400 usuarios y rol del mediador">
+              <div class="media-overlay-hint">
+                <span>Póster Oficial Completo</span>
+                <span class="zoom-hint">🔍 Ampliar Infografía</span>
+              </div>
+            </div>
+
+            <p class="media-card-desc">
+              Póster analítico que resume el impacto del tiempo en pantalla en la salud mental y fundamenta la necesidad de transformar el smartphone de un distractor a un mediador de presencia.
+            </p>
+            <ul class="media-card-points">
+              <li><span>•</span> <div><strong>Correlación Negativa de -0.64:</strong> Relación inversa demostrada entre horas de pantalla y bienestar.</div></li>
+              <li><span>•</span> <div><strong>Estudiantes en Riesgo:</strong> El segmento con menor bienestar (15.53) vs empleados (20.18).</div></li>
+              <li><span>•</span> <div><strong>Tecnología que une, no que absorbe:</strong> Mediador interactivo sutil en la mesa con éxito medido en contacto visual.</div></li>
+            </ul>
+          </div>
+
+          <!-- Mind Map de NotebookLM (Clase 24) -->
+          <div class="media-card">
+            <span class="media-card-badge">Clase 24 · Mapa Conceptual NotebookLM</span>
+            <h3 class="media-card-title">Mapa Mental de la Arquitectura del Problema</h3>
+            
+            <div class="media-img-wrapper" data-lightbox="Clase24/Mind_Map_NotebookLM.png" data-caption="Mapa Mental generado con NotebookLM (Clase 24): Estructuración del proyecto Sobremesa en 4 ramas nodales: Desafío de Diseño, Análisis de Bienestar Mental, Estadísticas por Ocupación e Implementación de IA.">
+              <img src="./Sobremesa · Hallazgos Principales del Proyecto de Diseño_files/Mind_Map_NotebookLM.png" alt="Mapa Mental conceptual de NotebookLM para el Proyecto Sobremesa que relaciona desafío de diseño, bienestar y modelos IA">
+              <div class="media-overlay-hint">
+                <span>Diagrama Nodal Completo</span>
+                <span class="zoom-hint">🔍 Ampliar Mapa Mental</span>
+              </div>
+            </div>
+
+            <p class="media-card-desc">
+              Estructura conceptual sintetizada automáticamente con NotebookLM a partir de los documentos fundacionales del proyecto y el dataset de 400 personas.
+            </p>
+            <ul class="media-card-points">
+              <li><span>•</span> <div><strong>Desafío de Diseño:</strong> La hiperconexión causa desconexión interpersonal; la solución es un mediador de baja fricción.</div></li>
+              <li><span>•</span> <div><strong>Variables Clave:</strong> Triangulación entre estrés, horas de sueño y horas de socialización presencial.</div></li>
+              <li><span>•</span> <div><strong>Implementación IA:</strong> Bifurcación entre modelos analíticos (clasificación) y generativos (diálogo).</div></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filtro Interactivo de Contenidos -->
+    <div class="container">
+      <div class="filter-section">
+        <div class="filter-tabs">
+          <button class="filter-btn" data-filter="all">Todos los Hallazgos</button>
+          <button class="filter-btn" data-filter="datos">Datos &amp; Usuario</button>
+          <button class="filter-btn active" data-filter="ux">Pilares UX/UI</button>
+          <button class="filter-btn" data-filter="metricas">Métricas Invertidas</button>
+          <button class="filter-btn" data-filter="etica">Límites Éticos</button>
+          <button class="filter-btn" data-filter="ia">Arquitectura &amp; IA</button>
+        </div>
+        <div class="filter-count" id="filterCount">Mostrando 3 hallazgos</div>
+      </div>
+    </div>
+
+    <!-- Sección de Hallazgos Principales (Tarjetas Grid) -->
+    <section class="section-block" id="hallazgos-clave">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Evidencia &amp; Estrategia</span>
+          <h2 class="section-title">Los 9 Hallazgos Fundamentales del Proyecto</h2>
+          <p class="section-lead">
+            Integración de la investigación con NotebookLM, análisis de datos de bienestar mental, formulación de pilares de diseño e iteración con subagentes en la arquitectura de Sobremesa.
+          </p>
+        </div>
+
+        <div class="findings-grid" id="findingsGrid">
+
+          <!-- Card 1 -->
+          <article class="finding-card" data-category="datos" style="cursor: pointer; display: none;">
+            <div class="finding-top">
+              <span class="finding-number">Hallazgo 01</span>
+              <span class="finding-tag">Datos &amp; Psicología</span>
+            </div>
+            <h3>No es el tiempo compartido, es la atención</h3>
+            <p>
+              El análisis del dataset de 400 personas demostró que compartir más horas con personas casi no eleva el bienestar mental (20 → 19 → 22 sobre 100), mientras que el tiempo de pantalla de ocio lo desploma con fuerza (36 → 16 → 8). Esto valida que la estrategia de Sobremesa no es "juntar gente por juntar", sino proteger la calidad atencional del encuentro.
+            </p>
+            <div class="finding-quote">
+              "El efecto de deterioro del bienestar por pantallas se mantiene incluso en el grupo que más socializa (r = -0.70)."
+            </div>
+            <div class="finding-footer">
+              <span class="finding-source">Actividad Clase 25 · Dataset 400 personas</span>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="finding-card" data-category="ux" style="cursor: pointer; display: flex;">
+            <div class="finding-top">
+              <span class="finding-number">Hallazgo 02</span>
+              <span class="finding-tag">UX · Baja Fricción</span>
+            </div>
+            <h3>La paradoja de la interfaz que se desvanece</h3>
+            <p>
+              El verdadero reto de diseño no es hacer la app "fácil de usar", sino lograr que la interfaz se <strong>desvanezca en el ritual social</strong>. Si la aplicación exige un paso de más, una animación prolongada o tipografía de lectura compleja, se transforma en un "ruido visual y táctil" que rompe el flujo conversacional.
+            </p>
+            <div class="finding-quote">
+              "Priorizar el 'mirar y pasar' (glance &amp; pass) sobre el 'quedarse mirando' (stare &amp; scroll)."
+            </div>
+            <div class="finding-footer">
+              <span class="finding-source">Tarea Clase 29 · NotebookLM Insight #1</span>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="finding-card" data-category="ux" style="cursor: pointer; display: flex;">
+            <div class="finding-top">
+              <span class="finding-number">Hallazgo 03</span>
+              <span class="finding-tag">Contenido &amp; Modelo</span>
+            </div>
+            <h3>Mantener la vida útil sin fricción digital</h3>
+            <p>
+              La mayoría de los juegos de conversación fracasan porque los usuarios agotan rápidamente las tarjetas fijas. Sobremesa resuelve esto combinando un modelo analítico (clasificación del contexto de la mesa) y un modelo generativo (detonadores en tiempo real o precargados) con sensibilidad psicológica, sin requerir registros ni cuentas.
+            </p>
+            <div class="finding-quote">
+              "Contenido adaptativo según la fase de la comida: picoteo, plato de fondo o postre."
+            </div>
+            <div class="finding-footer">
+              <span class="finding-source">Ficha Proyecto &amp; Tarea Clase 28</span>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="finding-card" data-category="ux" style="cursor: pointer; display: flex;">
+            <div class="finding-top">
+              <span class="finding-number">Hallazgo 04</span>
+              <span class="finding-tag">Ritual &amp; Hábitos</span>
+            </div>
+            <h3>El silencio como ritual voluntario</h3>
+            <p>
+              Las notificaciones externas (mensajería, correos) destruyen el estado de flujo. La solución no debe ser una imposición técnica rígida (forzar bloqueos que generan rechazo), sino un acuerdo ritualístico: la app invita en su onboarding a activar voluntariamente el 'Modo Avión' o 'No Molestar', convirtiendo el gesto en una señal de respeto mutuo.
+            </p>
+            <div class="finding-quote">
+              "El acto físico de guardar o voltear el celular funciona como compromiso social explícito."
+            </div>
+            <div class="finding-footer">
+              <span class="finding-source">Tarea Clase 29 · NotebookLM Insight #3</span>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="finding-card" data-category="metricas" style="cursor: pointer; display: none;">
+            <div class="finding-top">
+              <span class="finding-number">Hallazgo 05</span>
+              <span class="finding-tag">Métricas de Éxito</span>
+            </div>
+            <h3>Inversión total del modelo de métricas</h3>
+            <p>
+              Las apps tradicionales optimizan para retención, tiempo de pantalla diario y clics. Sobremesa invierte estas métricas: el éxito se mide por <strong>lo rápido que el celular deja de ser el centro de atención</strong> y el tiempo que los comensales pasan mirándose a los ojos y dialogando.
+            </p>
+            <div class="finding-quote">
+              "Éxito = Mirarse a los ojos &gt; Mirar la pantalla. Menos tiempo en app es una victoria de diseño."
+            </div>
+            <div class="finding-footer">
+              <span class="finding-source">Actividad Clase 25 · Métricas de Éxito</span>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="finding-card" data-category="etica" style="cursor: pointer; display: none;">
+            <div class="finding-top">
+              <span class="finding-number">Hallazgo 06</span>
+              <span class="finding-tag">Ética &amp; Límites</span>
+            </div>
+            <h3>Límites temáticos estrictos por seguridad vincular</h3>
+            <p>
+              Para que la mesa sea un espacio seguro, el agente conversacional debe tener restricciones infranqueables: nunca introducir temas polarizantes (política partidista, religión, finanzas personales, conflictos no resueltos). En su lugar, fomenta recuerdos de infancia, proyectos compartidos, curiosidades y agradecimientos.
+            </p>
+            <div class="finding-quote">
+              "El sistema genera por defecto temas livianos y solo profundiza si detecta un vínculo maduro."
+            </div>
+            <div class="finding-footer">
+              <span class="finding-source">Actividad Clase 25 · Claude &amp; DeepSeek Síntesis</span>
+            </div>
+          </article>
+
+          <!-- Card 7 -->
+          <article class="finding-card" data-category="datos" style="cursor: pointer; display: none;">
+            <div class="finding-top">
+              <span class="finding-number">Hallazgo 07</span>
+              <span class="finding-tag">Referentes Análogos</span>
+            </div>
+            <h3>El poder de los rituales físicos (PhoneStack &amp; Unplugged)</h3>
+            <p>
+              La investigación mediante subagentes en la web descubrió que la desintoxicación digital exitosa recurre con frecuencia a elementos analógicos: juegos como <em>PhoneStack</em> (apilar celulares boca abajo y quien lo toca paga la cuenta) o fundas/cestas en restaurantes (<em>Restaurant Unplugged</em>). Sobremesa incorpora estas dinámicas en sus dinámicas de mesa.
+            </p>
+            <div class="finding-quote">
+              "La tecnología puede simplemente sugerir o arbitrar un juego físico entre comensales."
+            </div>
+            <div class="finding-footer">
+              <span class="finding-source">Tarea Clase 29 · Investigación Subagentes</span>
+            </div>
+          </article>
+
+          <!-- Card 8 -->
+          <article class="finding-card" data-category="ia" style="cursor: pointer; display: none;">
+            <div class="finding-top">
+              <span class="finding-number">Hallazgo 08</span>
+              <span class="finding-tag">Arquitectura IA</span>
+            </div>
+            <h3>El "Anfitrión Silencioso": Rol y pipeline combinado</h3>
+            <p>
+              El agente no debe actuar como un protagonista charlatán, sino como un <strong>anfitrión paciente y sutil</strong>. Su arquitectura combina un modelo analítico (ej. BETO entrenado en Chile para detectar tono y tensión emocional sin sesgo cultural) y un modelo generativo empático (Llama 3.1 8B / Empathetic Dialogues con 32 emociones).
+            </p>
+            <div class="finding-quote">
+              "Monitoreo de latencia crítica: una respuesta demorada crea una pausa incómoda en la mesa."
+            </div>
+            <div class="finding-footer">
+              <span class="finding-source">Tarea Clase 26 &amp; Tarea Clase 28</span>
+            </div>
+          </article>
+
+          <!-- Card 9 -->
+          <article class="finding-card" data-category="ia" style="cursor: pointer; display: none;">
+            <div class="finding-top">
+              <span class="finding-number">Hallazgo 09</span>
+              <span class="finding-tag">Evaluación de Modelos</span>
+            </div>
+            <h3>Comparativa de IAs: exhaustividad vs velocidad</h3>
+            <p>
+              La prueba comparativa entre ChatGPT, Claude y DeepSeek analizando el proyecto reveló diferencias marcadas: DeepSeek fue el más veloz pero superficial (inventó costos no solicitados); Claude fue altamente estructurado y certero en arquitectura de costos; ChatGPT ofreció el análisis más crítico y metódico del dataset sin inventar tarifas.
+            </p>
+            <div class="finding-quote">
+              "La utilidad de una IA en diseño UX no depende de su rapidez, sino de su fidelidad al contexto."
+            </div>
+            <div class="finding-footer">
+              <span class="finding-source">Actividad Clase 25 · Tabla Comparativa</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Análisis Cuantitativo de Datos -->
+    <section class="section-block" id="datos">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Evidencia Empírica</span>
+          <h2 class="section-title">Validación Cuantitativa: Bienestar vs Pantalla</h2>
+          <p class="section-lead">
+            Exploración de datos reales con 400 participantes (<code>ScreenTime vs MentalWellness.csv</code>), cruzando horas de ocio en pantalla, nivel de estrés y ocupación laboral.
+          </p>
+        </div>
+
+        <div class="data-card-wrapper">
+          <div class="chart-header">
+            <div>
+              <h3 class="chart-title">Índice de Bienestar Mental según Ocupación</h3>
+              <p class="chart-subtitle">Escala estandarizada de 0 a 100 puntos (promedios por grupo socio-ocupacional)</p>
+            </div>
+            <span class="brand-tag">N = 400 registros</span>
+          </div>
+
+          <!-- Visualización SVG de Barras Minimalista Dark & Green -->
+          <div class="svg-chart-container">
+            <svg viewBox="0 0 800 240" width="100%" height="100%" style="overflow: visible;">
+              <line x1="160" y1="30" x2="760" y2="30" stroke="var(--border-color)" stroke-dasharray="3,3"></line>
+              <line x1="160" y1="80" x2="760" y2="80" stroke="var(--border-color)" stroke-dasharray="3,3"></line>
+              <line x1="160" y1="130" x2="760" y2="130" stroke="var(--border-color)" stroke-dasharray="3,3"></line>
+              <line x1="160" y1="180" x2="760" y2="180" stroke="var(--border-color)" stroke-dasharray="3,3"></line>
+
+              <text x="145" y="35" text-anchor="end" fill="var(--text-secondary)" font-size="13" font-family="var(--font-sans)" font-weight="600">Desempleados (n=27)</text>
+              <text x="145" y="85" text-anchor="end" fill="var(--text-secondary)" font-size="13" font-family="var(--font-sans)" font-weight="600">Jubilados (n=14)</text>
+              <text x="145" y="135" text-anchor="end" fill="var(--text-secondary)" font-size="13" font-family="var(--font-sans)" font-weight="600">Empleados (n=207)</text>
+              <text x="145" y="185" text-anchor="end" fill="var(--accent-coral)" font-size="13" font-family="var(--font-sans)" font-weight="700">Estudiantes (n=107)</text>
+
+              <!-- Barras de Datos -->
+              <rect x="160" y="20" width="205" height="22" rx="4" fill="var(--accent-navy)" opacity="0.85"></rect>
+              <text x="375" y="36" fill="var(--text-main)" font-size="12" font-family="var(--font-mono)" font-weight="700">34.27 / 100</text>
+
+              <rect x="160" y="70" width="189" height="22" rx="4" fill="var(--accent-green-bright)" opacity="0.85"></rect>
+              <text x="359" y="86" fill="var(--text-main)" font-size="12" font-family="var(--font-mono)" font-weight="700">31.58 / 100</text>
+
+              <rect x="160" y="120" width="121" height="22" rx="4" fill="var(--accent-green)" opacity="0.85"></rect>
+              <text x="291" y="136" fill="var(--text-main)" font-size="12" font-family="var(--font-mono)" font-weight="700">20.19 / 100</text>
+
+              <rect x="160" y="170" width="93" height="22" rx="4" fill="var(--accent-coral)"></rect>
+              <text x="263" y="186" fill="var(--accent-coral)" font-size="12" font-family="var(--font-mono)" font-weight="700">15.54 (Mínimo)</text>
+            </svg>
+          </div>
+
+          <div class="chart-legend">
+            <div class="legend-item">
+              <span class="legend-color" style="background: var(--accent-coral);"></span>
+              <span><strong>Grupo de Mayor Riesgo:</strong> Estudiantes universitarios y jóvenes (índice 15.54/100; alta fatiga por pantallas).</span>
+            </div>
+            <div class="legend-item">
+              <span class="legend-color" style="background: var(--accent-green);"></span>
+              <span><strong>Segmento Mayoritario:</strong> Empleados (51.7% de la muestra, con jornadas laborales híbridas y tiempo de ocio comprimido).</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de los 3 Pilares UX/UI con Foto 2 de Clase 27 -->
+    <section class="section-block" id="pilares">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Fundamentos de Interacción &amp; Sistema Visual</span>
+          <h2 class="section-title">Los 3 Pilares Esenciales de Diseño</h2>
+          <p class="section-lead">
+            Directrices acordadas para que la aplicación móvil actúe como un catalizador social discreto sin caer en la trampa del enganche digital.
+          </p>
+        </div>
+
+        <div class="findings-grid" style="margin-bottom: 2.5rem;">
+          <div class="finding-card" style="border-top: 4px solid var(--accent-green); cursor: pointer; display: none;">
+            <div class="finding-top">
+              <span class="finding-number">Pilar 1</span>
+              <span class="finding-tag">UX / UI</span>
+            </div>
+            <h3>Invisibilidad Funcional</h3>
+            <p>
+              La interfaz está diseñada para desaparecer en el momento en que se cumple la interacción. Utiliza micro-interacciones de alta legibilidad inmediata, sin barras de scroll infinitas, sin notificaciones invasivas y con pantallas de descanso que invitan a dejar el móvil sobre la mesa.
+            </p>
+            <div class="finding-quote">"El éxito del producto es que se use poco y se comparta mucho."</div>
+          </div>
+
+          <div class="finding-card" style="border-top: 4px solid var(--accent-green-bright); cursor: pointer; display: none;">
+            <div class="finding-top">
+              <span class="finding-number">Pilar 2</span>
+              <span class="finding-tag">Algoritmo &amp; Ética</span>
+            </div>
+            <h3>Curación Contextual y Adaptativa</h3>
+            <p>
+              El motor conversacional lee las condiciones de la mesa (número de comensales, relación de confianza, tiempo disponible) para sugerir temas acordes al momento exacto de la comida (aperitivo distendido, charla profunda de fondo, o distensión de postre).
+            </p>
+            <div class="finding-quote">"Evita agotar los temas mediante prompts dinámicos orientados a la empatía."</div>
+          </div>
+
+          <div class="finding-card" style="border-top: 4px solid var(--accent-navy); cursor: pointer; display: none;">
+            <div class="finding-top">
+              <span class="finding-number">Pilar 3</span>
+              <span class="finding-tag">Seguridad Humana</span>
+            </div>
+            <h3>Privacidad Radical por Diseño</h3>
+            <p>
+              Garantía absoluta de confidencialidad en la mesa: cero almacenamiento de audios o transcripciones, sin cuentas ni rastreadores comerciales. La tecnología se ejecuta de forma local y offline, protegiendo las conversaciones íntimas de cualquier recolección de datos.
+            </p>
+            <div class="finding-quote">"Un espacio seguro, cálido y completamente libre de juicios digitales."</div>
+          </div>
+        </div>
+
+        <!-- Recurso 2 de Clase 27: Ilustración Conceptual del Sistema Visual (Segunda Foto de Clase 27) -->
+        <div class="media-card" style="background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+            <span class="media-card-badge">Clase 27 · Sistema Visual v1 (Ilustración)</span>
+            <span class="zoom-hint">🔍 Clic en la ilustración para ampliar</span>
+          </div>
+          <h3 style="font-family: var(--font-sans); font-size: 1.45rem; font-weight: 700; margin-bottom: 0.75rem;">
+            La Conversación Continúa: Sobremesa en Reposo Activo
+          </h3>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.6;">
+            Ilustración generada para el sistema visual de Sobremesa que representa el momento inmediatamente posterior a la entrega de un detonador conversacional: el grupo dialoga animadamente mirándose a los ojos mientras el dispositivo reposa en la mesa con su pantalla de bajo brillo.
+          </p>
+          <div class="media-img-wrapper" data-lightbox="Clase27/escena_conversacion_ilustracion.png" data-caption="Sistema visual v1 (Clase 27 - Nano Banana): Cuatro amigos conversando animadamente en torno a la comida; la aplicación Sobremesa ya ha propuesto un tema y el dispositivo permanece en reposo sobre la mesa con su interfaz minimalista de tarjeta crema y botón verde oliva.">
+            <img src="./Sobremesa · Hallazgos Principales del Proyecto de Diseño_files/escena_conversacion_ilustracion.png" alt="Ilustración conceptual de cuatro amigos conversando cara a cara mientras el smartphone reposa sobre la mesa" style="height: 340px; object-fit: cover;">
+            <div class="media-overlay-hint">
+              <span>Ilustración del Sistema Visual v1</span>
+              <span class="zoom-hint">🔍 Ampliar Vista</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Sección de la Paradoja de Métricas -->
+    <section class="section-block" id="metricas">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Dirección Estratégica</span>
+          <h2 class="section-title">La Inversión del Paradigma de Métricas</h2>
+          <p class="section-lead">
+            Por qué los indicadores estándar de la industria tecnológica son exactamente los opuestos a los objetivos de diseño de Sobremesa.
+          </p>
+        </div>
+
+        <table class="paradigm-table" role="table">
+          <thead>
+            <tr>
+              <th scope="col">Dimensión</th>
+              <th scope="col">Métricas Tradicionales (Rechazadas)</th>
+              <th scope="col">Métricas de Sobremesa (Adoptadas)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tiempo de Uso</strong></td>
+              <td><span class="badge-reject">✕ Maximizar tiempo en pantalla (Time in App)</span></td>
+              <td><span class="badge-adopt">✓ Minimizar tiempo mirando la pantalla; maximizar contacto visual cara a cara</span></td>
+            </tr>
+            <tr>
+              <td><strong>Frecuencia y Notificaciones</strong></td>
+              <td><span class="badge-reject">✕ Notificaciones push constantes para reactivar al usuario</span></td>
+              <td><span class="badge-adopt">✓ Modo Silencio/Avión voluntario como ritual de entrada a la comida</span></td>
+            </tr>
+            <tr>
+              <td><strong>Navegación</strong></td>
+              <td><span class="badge-reject">✕ Scroll infinito, feeds dinámicos y reproducción automática</span></td>
+              <td><span class="badge-adopt">✓ 'Glance &amp; Pass': Leer tarjeta en 3 segundos y pasar el teléfono o dejarlo en la mesa</span></td>
+            </tr>
+            <tr>
+              <td><strong>Modelo de Datos</strong></td>
+              <td><span class="badge-reject">✕ Captura de perfiles, analítica de comportamiento y login</span></td>
+              <td><span class="badge-adopt">✓ 100% anónimo, local y offline; sin persistencia de grabaciones íntimas</span></td>
+            </tr>
+            <tr>
+              <td><strong>Criterio de Victoria</strong></td>
+              <td><span class="badge-reject">✕ Sesiones largas y retención adictiva de 30+ minutos</span></td>
+              <td><span class="badge-adopt">✓ Desconexión espontánea del celular tras encender una buena conversación</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Sección de Límites Temáticos Éticos -->
+    <section class="section-block" id="limites">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Curaduría Ética</span>
+          <h2 class="section-title">Qué Evitar vs. Qué Fomentar en la Mesa</h2>
+          <p class="section-lead">
+            Criterios de seguridad psicológica aplicados al generador de preguntas para resguardar la armonía y evitar fricciones destructivas.
+          </p>
+        </div>
+
+        <div class="ethics-grid">
+          <div class="ethics-box danger">
+            <div class="ethics-header">
+              <span>✕</span>
+              <span>Temáticas Prohibidas (Evitar)</span>
+            </div>
+            <ul class="ethics-list">
+              <li>
+                <span style="color: var(--accent-coral); font-weight: 700;">•</span>
+                <div><strong>Política contingente o partidista:</strong> Genera trincheras ideológicas inmediatas y tensión defensiva.</div>
+              </li>
+              <li>
+                <span style="color: var(--accent-coral); font-weight: 700;">•</span>
+                <div><strong>Religión y dogmas morales:</strong> Provoca juicios cruzados y alienación en grupos diversos.</div>
+              </li>
+              <li>
+                <span style="color: var(--accent-coral); font-weight: 700;">•</span>
+                <div><strong>Finanzas personales y deudas:</strong> Provoca incomodidad, vergüenza o comparación social negativa.</div>
+              </li>
+              <li>
+                <span style="color: var(--accent-coral); font-weight: 700;">•</span>
+                <div><strong>Chismes o juicios sobre terceros ausentes:</strong> Fomenta dinámicas tóxicas en lugar de vínculos genuinos.</div>
+              </li>
+              <li>
+                <span style="color: var(--accent-coral); font-weight: 700;">•</span>
+                <div><strong>Conflictos intrafamiliares no resueltos:</strong> No es una app terapéutica para abrir heridas profundas.</div>
+              </li>
+            </ul>
+          </div>
+
+          <div class="ethics-box success">
+            <div class="ethics-header">
+              <span>✓</span>
+              <span>Temáticas Estimuladas (Fomentar)</span>
+            </div>
+            <ul class="ethics-list">
+              <li>
+                <span style="color: var(--accent-green-bright); font-weight: 700;">•</span>
+                <div><strong>Recuerdos de infancia y juventud:</strong> Conecta a diferentes generaciones a través de la nostalgia y risa.</div>
+              </li>
+              <li>
+                <span style="color: var(--accent-green-bright); font-weight: 700;">•</span>
+                <div><strong>Anécdotas y relatos de viajes o aprendizajes:</strong> Estimula la escucha activa y la narración oral fluida.</div>
+              </li>
+              <li>
+                <span style="color: var(--accent-green-bright); font-weight: 700;">•</span>
+                <div><strong>Agradecimientos y reconocimientos mutuos:</strong> Refuerza el valor afectivo entre los presentes en la mesa.</div>
+              </li>
+              <li>
+                <span style="color: var(--accent-green-bright); font-weight: 700;">•</span>
+                <div><strong>Aspiraciones, sueños y proyectos futuros:</strong> Construye complicidad positiva y entusiasmo colaborativo.</div>
+              </li>
+              <li>
+                <span style="color: var(--accent-green-bright); font-weight: 700;">•</span>
+                <div><strong>Retos cooperativos y dilemas curiosos:</strong> Dinámicas lúdicas analógicas que obligan a interactuar sin mirar la pantalla.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección de Referentes, Benchmark e Inteligencia Artificial -->
+    <section class="section-block" id="benchmark">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-badge">Benchmarking &amp; Ecosistema Tecnológico</span>
+          <h2 class="section-title">Inspiración Analógica, Agente Claude y Comparativa de LLMs</h2>
+          <p class="section-lead">
+            Análisis de iniciativas reales contra la distracción digital, interacción con el agente en Claude (Clase 28) y evaluación empírica de modelos de IA.
+          </p>
+        </div>
+
+        <h3 class="section-title" style="font-size: 1.6rem; margin-bottom: 1.25rem;">1. Referentes Físicos y Analógicos de Desconexión</h3>
+        <div class="benchmark-grid">
+          <div class="benchmark-card">
+            <span class="benchmark-tag">Juego Social Espontáneo</span>
+            <h4 class="benchmark-name">PhoneStack (Phone Stack Game)</h4>
+            <p class="benchmark-text">Todos apilan sus teléfonos boca abajo en el centro de la mesa al iniciar la comida. Quien toma su celular primero paga la cuenta o cumple una penitencia.</p>
+            <div class="benchmark-takeaway">Aprendizaje: El compromiso voluntario y la penitencia lúdica aumentan la desconexión sin necesidad de apps restrictivas.</div>
+          </div>
+
+          <div class="benchmark-card">
+            <span class="benchmark-tag">Iniciativa en Gastronomía</span>
+            <h4 class="benchmark-name">Restaurant Unplugged</h4>
+            <p class="benchmark-text">Iniciativa en restaurantes donde los comensales guardan sus teléfonos en cestas o fundas blindadas al entrar a cambio de un descuento en la cuenta final.</p>
+            <div class="benchmark-takeaway">Aprendizaje: La recompensa tangible e incentivos de bienvenida aceleran la aceptación del ritual de desconexión.</div>
+          </div>
+
+          <div class="benchmark-card">
+            <span class="benchmark-tag">Dispositivos Físicos</span>
+            <h4 class="benchmark-name">kSafe / Yondr Pouches</h4>
+            <p class="benchmark-text">Contenedores con temporizador o fundas con cierre magnético utilizadas en eventos y cenas familiares para bloquear celulares por un tiempo programado.</p>
+            <div class="benchmark-takeaway">Aprendizaje: Sobremesa rescata la idea de un 'espacio físico designado' en la mesa para los teléfonos.</div>
+          </div>
+        </div>
+
+        <!-- Recurso Adicional: Interacción Real del Agente en Claude (Clase 28) -->
+        <div class="media-card" style="margin-top: 2.5rem; background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: var(--radius-lg); padding: 1.75rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem;">
+            <span class="media-card-badge">Clase 28 · Agente Mediador en Claude</span>
+            <span class="zoom-hint">🔍 Clic para ampliar captura</span>
+          </div>
+          <h3 style="font-family: var(--font-sans); font-size: 1.45rem; font-weight: 700; margin-bottom: 0.75rem;">
+            El "Anfitrión Silencioso" en Acción: Dinámica de Ronda Rápida
+          </h3>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.25rem; line-height: 1.6;">
+            Prueba de interacción en Claude con el prompt del sistema de Sobremesa. Ante la petición: <em>"Somos 4 amigos almorzando, danos una dinámica rápida"</em>, el agente formula una regla de desconexión clara: <strong>"Sin celulares hasta que los 4 hayan respondido 🌍"</strong>.
+          </p>
+          <div class="media-img-wrapper" data-lightbox="Clase28/IMG_0373.PNG" data-caption="Prueba de interacción del Agente Sobremesa en Claude (Clase 28): Propuesta de la ronda rápida &#39;Lo que no sabías&#39;, con reglas analógicas claras para asegurar la atención presencial sin tocar los celulares.">
+            <img src="./Sobremesa · Hallazgos Principales del Proyecto de Diseño_files/IMG_0373.PNG" alt="Captura de la interacción del agente Sobremesa en Claude proponiendo una dinámica de conversación" style="height: 320px; object-fit: cover; object-position: top;">
+            <div class="media-overlay-hint">
+              <span>Captura de la Arquitectura del Agente</span>
+              <span class="zoom-hint">🔍 Ampliar Captura</span>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="section-title" style="font-size: 1.6rem; margin: 3.5rem 0 1.25rem;">2. Comparativa de Modelos IA en el Encargo de Diseño (Clase 25)</h3>
+        <div class="ai-compare-grid">
+          <!-- ChatGPT -->
+          <div class="ai-card">
+            <div class="ai-card-title" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>ChatGPT</span>
+              <span class="ai-badge">Exhaustivo</span>
+            </div>
+            <ul class="ai-metrics-list">
+              <li><span>Velocidad de entrega:</span> <span>Más lento</span></li>
+              <li><span>Extensión del informe:</span> <span>13 páginas</span></li>
+              <li><span>Benchmark analizado:</span> <span>8 referentes</span></li>
+              <li><span>Carta Gantt (Excel):</span> <span>3 hojas editables</span></li>
+              <li><span>Estructura de costos:</span> <span>289 hrs / Editable sin inventar</span></li>
+            </ul>
+            <p class="ai-conclusion"><strong>Balance:</strong> Destacó por analizar en profundidad el dataset crudo, identificar sesgos metodológicos y no inventar tarifas irreales.</p>
+          </div>
+
+          <!-- Claude -->
+          <div class="ai-card">
+            <div class="ai-card-title" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>Claude</span>
+              <span class="ai-badge">Estructurado</span>
+            </div>
+            <ul class="ai-metrics-list">
+              <li><span>Velocidad de entrega:</span> <span>Intermedio</span></li>
+              <li><span>Extensión del informe:</span> <span>9 páginas</span></li>
+              <li><span>Puntos clave:</span> <span>3 pilares precisos</span></li>
+              <li><span>Carta Gantt (Excel):</span> <span>2 hojas editables</span></li>
+              <li><span>Presupuesto propuesto:</span> <span>$8.171.050 CLP (296 hrs)</span></li>
+            </ul>
+            <p class="ai-conclusion"><strong>Balance:</strong> El análisis más claro, conciso y mejor redactado conceptualmente, con desglose detallado de horas y contingencias.</p>
+          </div>
+
+          <!-- DeepSeek -->
+          <div class="ai-card">
+            <div class="ai-card-title" style="display: flex; justify-content: space-between; align-items: center;">
+              <span>DeepSeek</span>
+              <span class="ai-badge">Veloz / Parcial</span>
+            </div>
+            <ul class="ai-metrics-list">
+              <li><span>Velocidad de entrega:</span> <span>El más rápido</span></li>
+              <li><span>Extensión del informe:</span> <span>5 páginas</span></li>
+              <li><span>Carta Gantt (Excel):</span> <span>No generó archivo</span></li>
+              <li><span>Rango de costos:</span> <span>$8.1M – $11.7M CLP</span></li>
+              <li><span>Calidad metodológica:</span> <span>Generalista</span></li>
+            </ul>
+            <p class="ai-conclusion"><strong>Balance:</strong> Muy rápido pero con menor respaldo analítico; omitió entregables clave e incorporó supuestos no fundamentados.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal / Lightbox Universal Interactivo -->
+  <div class="quick-modal-overlay" id="quickModalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="quick-modal">
+      <button class="modal-close" id="modalCloseBtn" aria-label="Cerrar modal">×</button>
+      <div id="modalContent">
+            <div style="margin-bottom: 1rem;">
+              <span class="media-card-badge">Visualizador de Recurso · Sobremesa</span>
+            </div>
+            <img src="./Sobremesa · Hallazgos Principales del Proyecto de Diseño_files/escena_uso_sobremesa_fotografia.png" alt="Vista ampliada" class="modal-image-preview">
+            <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-top: 1rem; border-top: 1px solid var(--border-light); padding-top: 1rem;">
+              Escena de uso conceptual de Sobremesa (Clase 27 - Gemini 2.5 Flash Image): cuatro amigos comparten la comida en un comedor doméstico acogedor; un único smartphone descansa horizontalmente en la mesa con la pantalla hacia arriba sin acaparar miradas. La conversación presencial es la protagonista.
+            </p>
+          </div>
+    </div>
+  </div>
+
+  <!-- Pie de Página -->
+  <footer>
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <h4>Sobremesa · Proyecto de Diseño</h4>
+        <p>Diplomado en Inteligencia Artificial Aplicada al Diseño · Universidad del Desarrollo 2026</p>
+      </div>
+      <div class="footer-badge">
+        <span>Diseñado por Isabel Ferrán · Victoria Madriaza · M. Ignacia Moya</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lógica Interactiva en Vanilla JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Alternador de Tema Oscuro / Claro (Oscuro por Defecto)
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeIcon = document.getElementById('themeIcon');
+      const themeText = document.getElementById('themeText');
+      const htmlElement = document.documentElement;
+
+      const savedTheme = localStorage.getItem('sobremesa-theme') || 'dark';
+      setTheme(savedTheme);
+
+      themeToggleBtn.addEventListener('click', () => {
+        const currentTheme = htmlElement.getAttribute('data-theme') || 'dark';
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+      });
+
+      function setTheme(theme) {
+        htmlElement.setAttribute('data-theme', theme);
+        localStorage.setItem('sobremesa-theme', theme);
+        if (theme === 'dark') {
+          themeIcon.textContent = '🌙';
+          themeText.textContent = 'Oscuro';
+        } else {
+          themeIcon.textContent = '☀️';
+          themeText.textContent = 'Claro';
+        }
+      }
+
+      // 2. Filtro de Tarjetas de Hallazgos
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const findingCards = document.querySelectorAll('.finding-card');
+      const filterCount = document.getElementById('filterCount');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          const filter = btn.getAttribute('data-filter');
+          let visibleCount = 0;
+
+          findingCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            if (filter === 'all' || category === filter) {
+              card.style.display = 'flex';
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          filterCount.textContent = `Mostrando ${visibleCount} hallazgo${visibleCount === 1 ? '' : 's'}`;
+        });
+      });
+
+      // 3. Modal / Lightbox Universal
+      const modalOverlay = document.getElementById('quickModalOverlay');
+      const modalCloseBtn = document.getElementById('modalCloseBtn');
+      const modalContent = document.getElementById('modalContent');
+
+      // Clic en tarjetas de hallazgos
+      findingCards.forEach(card => {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', () => {
+          const number = card.querySelector('.finding-number').textContent;
+          const tag = card.querySelector('.finding-tag').textContent;
+          const title = card.querySelector('h3').textContent;
+          const text = card.querySelector('p').textContent;
+          const quote = card.querySelector('.finding-quote') ? card.querySelector('.finding-quote').textContent : '';
+          const source = card.querySelector('.finding-source').textContent;
+
+          modalContent.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+              <span class="finding-number">${number}</span>
+              <span class="finding-tag" style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">${tag}</span>
+            </div>
+            <h2 style="font-family: var(--font-sans); font-size: 1.95rem; font-weight: 800; line-height: 1.2; margin-bottom: 1.25rem; color: var(--text-main); letter-spacing: -0.03em;">${title}</h2>
+            <p style="font-size: 1.05rem; line-height: 1.7; color: var(--text-secondary); margin-bottom: 1.5rem;">${text}</p>
+            ${quote ? `<div class="finding-quote" style="font-size: 0.95rem; margin-bottom: 1.5rem;">${quote}</div>` : ''}
+            <div style="padding-top: 1.25rem; border-top: 1px solid var(--border-light); font-size: 0.85rem; color: var(--text-muted);">
+              <strong>Fuente documental de origen:</strong> <span style="font-family: var(--font-mono); color: var(--accent-green-bright); font-weight: 600;">${source}</span>
+            </div>
+          `;
+
+          openModal();
+        });
+      });
+
+      // Clic en elementos con lightbox para ampliar imágenes (Infografía, Mapa Mental, Fotos de Clase 27, etc.)
+      const lightboxTriggers = document.querySelectorAll('[data-lightbox]');
+      lightboxTriggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const imgSrc = trigger.getAttribute('data-lightbox');
+          const caption = trigger.getAttribute('data-caption') || '';
+
+          modalContent.innerHTML = `
+            <div style="margin-bottom: 1rem;">
+              <span class="media-card-badge">Visualizador de Recurso · Sobremesa</span>
+            </div>
+            <img src="${imgSrc}" alt="Vista ampliada" class="modal-image-preview">
+            <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6; margin-top: 1rem; border-top: 1px solid var(--border-light); padding-top: 1rem;">
+              ${caption}
+            </p>
+          `;
+
+          openModal();
+        });
+      });
+
+      function openModal() {
+        modalOverlay.classList.add('active');
+        modalOverlay.setAttribute('aria-hidden', 'false');
+      }
+
+      modalCloseBtn.addEventListener('click', closeModal);
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) closeModal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+          closeModal();
+        }
+      });
+
+      function closeModal() {
+        modalOverlay.classList.remove('active');
+        modalOverlay.setAttribute('aria-hidden', 'true');
+      }
+    });
+  </script>
+
+
+</body></html>
