@@ -62,4 +62,4 @@ No aplica consentimiento individual, ya que no se recolectaron datos personales 
 
 * Qué necesita saber quien use este dataset en la próxima unidad:
 
-Este dataset es el corazón conversacional de Sobremesa. Quien reciba el proyecto en la Unidad 4 debe saber que la clave de su efectividad es la **oportunidad del disparo conversacional** filtrado por la fase de la comida. Se debe mantener la estructura de columnas (\`id\`, \`pregunta\_detonante\`, \`categoria\`, \`fase\_comida\`, \`nivel\_intimidad\`) para asegurar el filtrado lógico correcto antes de desplegar el contenido en pantalla.
+Este dataset es el centro conversacional de Sobremesa. Quien reciba el proyecto en la Unidad 4 debe saber que la clave de su efectividad es la **oportunidad del disparo conversacional** filtrado por la fase de la comida. Se debe mantener la estructura de columnas (\`id\`, \`pregunta\_detonante\`, \`categoria\`, \`fase\_comida\`, \`nivel\_intimidad\`) para asegurar el filtrado lógico correcto antes de desplegar el contenido en pantalla.
