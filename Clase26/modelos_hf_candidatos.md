@@ -98,7 +98,7 @@ Basado en el problema de tu proyecto (heredado de Unidad 2), buscar en HF: \- 1 
 Para cada uno, documentar en tu bitácora: nombre, tarea, licencia, por qué te sirve.
 
 **Modelo Generativo**  
-**![][image9]**
+**![](captures/llama2.jpeg)**
 
 **Nombre:** Llama 3.1-8B-Instruct  
 **Tarea:** Generación de textos   
@@ -106,14 +106,14 @@ Para cada uno, documentar en tu bitácora: nombre, tarea, licencia, por qué te 
 **Por qué sirve:** Para redactar los disparadores de conversación adaptados a la mesa de manera fluida y cálida, actuando como el motor generativo de tu aplicación. Tiene un entendimiento sobresaliente del idioma español.
 
 **Modelo Analítico**  
-**![][image10]**  
+**![](captures/beto.jpeg)** 
 **Nombre:** BETO Universidad de Chile  
 **Tarea:** Clasificación de textos   
 **Licencia:** CC BY 4.0  
 **Por qué sirve:** Al ser entrenado en Chile, es ideal para analizar el texto de retroalimentación de los usuarios y clasificar si la dinámica de la mesa fue divertida, tensa o nostálgica sin perder el contexto cultural.
 
 **Dataset**   
-**![][image11]**
+**![](captures/empatic.jpeg)**
 
 **Nombre:** Empathetic\_dialogues\_llm  
 **Tarea:** Clasificación de textos   
