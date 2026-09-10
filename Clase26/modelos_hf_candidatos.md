@@ -19,6 +19,7 @@
   * Licencia.  
   * Una limitación declarada en la model card.
 
+
 **Modelo 1**  
 **![captura_de_imagen](captures/llama1.jpg)**
 
@@ -28,6 +29,7 @@
 **Tamaño:** 1B params.  
 **Licencia:** llama3.2  
 **Una limitación declarada:** Uso de cualquier forma que infrinja las leyes o regulaciones aplicables (incluidas las leyes de cumplimiento comercial). Uso de cualquier otra forma prohibida por la Política de uso aceptable y la Licencia de la comunidad Llama 3.2. Uso en idiomas distintos a los explícitamente mencionados como compatibles en esta tarjeta modelo.
+
 
 **Modelo 2**  
 **![captura_de_imagen](captures/nvidia.jpeg)**
@@ -39,6 +41,7 @@
 **Licencia:** nvidia-nemotron-open-model-license  
 **Una limitación declarada:** Uso de memoria**:** A pesar de activar solo 12 mil millones de parámetros por token (12B activos de 120B totales), la carga total del modelo en memoria requiere hardware de clase empresarial/servidor (típicamente 80 GB+ de VRAM).
 
+
 **Modelo 3**  
 **![](captures/Blooz.jpeg)**
 
@@ -48,6 +51,8 @@
 **Tamaño:** 0..6B params.  
 **Licencia:** bigscience-bloom-rail-1.0  
 **Una limitación declarada:** El rendimiento puede variar según la indicación. Para los modelos BLOOMZ, recomendamos dejar muy claro cuándo termina la entrada para evitar que el modelo intente continuarla. Por ejemplo, la indicación " *Traducir al inglés: Je t'aime* " sin el punto (.) al final, puede hacer que el modelo intente continuar la frase en francés. Mejores indicaciones son, por ejemplo, " *Traducir al inglés: Je t'aime.* ", " *Traducir al inglés: Je t'aime. Traducción:* " " *¿Qué es "Je t'aime." en inglés?* ", donde queda claro para el modelo cuándo debe responder. Además, recomendamos proporcionar al modelo tanto contexto como sea posible. Por ejemplo, si quiere que responda en telugu, dígale al modelo, por ejemplo, "*Explique en una frase en telugu qué es la retropropagación en redes neuronales*".
+
+
 
 **Ejercicio 2 — Probar modelos vía Spaces**
 
@@ -60,6 +65,8 @@
 **Space 1: FLUX.1**   
 **![](captures/Flux.jpeg)**
 
+
+
 **Space 2: Z Image Turbo**  
 **![](captures/zturbo.jpeg)**
 
@@ -67,6 +74,7 @@
 
 Ambas herramientas fueron sumamente expeditas, logrando generar y desplegar la imagen final en menos de un minuto. Sin embargo, la diferencia determinante radicó en la interpretación del prompt y la fidelidad del resultado.  
 Por un lado, **Flux.1** desvió la atención del elemento principal expresado en la instrucción, priorizando la composición de un comedor y una mesa de estilo rústico en lugar de enfocar el celular con sus atributos estéticos solicitados. En contraste, **Z-Image** comprendió con mayor precisión la esencia del pedido, ubicando el objeto central de forma idónea y entregando una calidad visual superior y alineada con la idea inicial. En definitiva, aunque ambos espacios destacan por su rapidez, Z-Image ofrece un apego semántico y un nivel de detalle sustancialmente mejor.
+
 
 * ✅ Repetir con Text-Generation (probar 2 LLMs open source vía Spaces).
 
@@ -76,11 +84,14 @@ Por un lado, **Flux.1** desvió la atención del elemento principal expresado en
 
 **![](captures/Banana1.jpeg)** 
 **![](captures/Banana2.jpeg)** 
+
+
 **Space 2: ChatGPT Prompt Generator**
 
 **![](captures/Chatgpt_prompt.jpeg)** 
 
 Ambos Spaces fueron rápidos, aunque BananaMind Arena tardó ligeramente más en procesar la respuesta, éste ofreció respuestas informativas directas, pero con inconsistencias. En cambio, ChatGPT Prompt Generator transformó la entrada en un prompt de rol estructurado y preciso de manera inmediata. 
+
 
 **Ejercicio 3 — Buscar modelos para tu proyecto (25 min)**  
 Basado en el problema de tu proyecto (heredado de Unidad 2), buscar en HF: \- 1 modelo generativo relevante. \- 1 modelo analítico relevante. \- 1 dataset que podrías usar.  
