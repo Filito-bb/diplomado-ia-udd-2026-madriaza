@@ -33,4 +33,4 @@ Familias, parejas, grupos de amigos y companeros de trabajo que valoran el encue
 * [ ] Clase 31 - Antigravity Loop + cierre (docs/antigravity_loop.md)
 
 #### 7. Notas para Mauricio (Unidad 4)
-Este proyecto mide su exito no por la retencion de los usuarios en la pantalla del celular, sino por el tiempo de calidad que pasan mirandose a los ojos y conversando de manera presencial. El smartphone solo actua como un mediador de baja friccion.
+Este proyecto mide su exito no por la retencion de los usuarios en la pantalla del celular, sino por el tiempo de calidad que pasan conversando de manera presencial. El smartphone solo actua como un mediador de baja friccion.
